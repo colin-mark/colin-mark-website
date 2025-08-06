@@ -32,8 +32,9 @@
   margin-bottom: 1rem;
 }
 
-/* Remove padding for home page to allow full-width hero */
-.page-container.home-page {
+/* Remove padding for home page and about page to allow full-width sections */
+.page-container.home-page,
+.page-container.about-page {
   padding: 0;
 }
 
@@ -231,6 +232,190 @@
   color: #666;
 }
 
+/* About page hero section */
+.about-hero-section {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.about-hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+.about-hero-subtitle {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.about-hero-avatar {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.avatar-placeholder {
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.avatar-image {
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  width: 120px;
+  height: 120px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.avatar-image:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
+}
+
+.headshot {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* About bio section */
+.about-bio-section {
+  padding: 80px 0;
+  text-align: center;
+}
+
+.bio-content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.bio-content p {
+  font-size: 1.2rem;
+  color: #555;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* About stats section - full width background */
+.about-stats-background {
+  width: 100%;
+  background-color: #f8f9fa;
+  padding: 80px 20px;
+  margin: 0;
+}
+
+.about-stats-section {
+  text-align: center;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-item h3 {
+  font-size: 1.8rem;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.stat-item p {
+  font-size: 1rem;
+  color: #666;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* About skills section */
+.about-skills-section {
+  padding: 80px 0;
+  text-align: center;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.skill-card {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 40px 30px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+}
+
+.skill-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.skill-card h3 {
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.skill-card p {
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* About CTA section - full width background */
+.about-cta-background {
+  width: 100%;
+  background-color: #f8f9fa;
+  padding: 80px 20px;
+  margin: 0;
+}
+
+.about-cta-section {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.about-cta-section h2 {
+  font-size: 1.8rem;
+  color: #333;
+  font-weight: 400;
+  margin-bottom: 40px;
+  line-height: 1.4;
+}
+
+.about-cta-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
 /* Portfolio page styles */
 .portfolio-grid {
   display: grid;
@@ -416,5 +601,73 @@
   
   .contact-form {
     padding: 25px;
+  }
+  
+  /* About page responsive styles */
+  .about-hero-content h1 {
+    font-size: 2.2rem;
+  }
+  
+  .about-hero-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .about-hero-avatar svg {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .avatar-image {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .about-bio-section {
+    padding: 60px 0;
+  }
+  
+  .bio-content p {
+    font-size: 1.1rem;
+  }
+  
+  .about-stats-background {
+    padding: 60px 20px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 30px;
+  }
+  
+  .stat-item h3 {
+    font-size: 1.5rem;
+  }
+  
+  .about-skills-section {
+    padding: 60px 0;
+  }
+  
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .about-cta-background {
+    padding: 60px 20px;
+  }
+  
+  .about-cta-section h2 {
+    font-size: 1.5rem;
+  }
+  
+  .about-cta-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .about-cta-buttons .cta-button {
+    width: 100%;
+    max-width: 280px;
   }
 }
