@@ -235,7 +235,7 @@ const Contact = () => {
                 }}
               >
                 {isSubmitting ? 'Sending...' : 
-                 (!isDevelopment && !recaptchaCompleted) ? 'Complete reCAPTCHA to Send' : 
+                 (!isDevelopment && !recaptchaCompleted) ? 'Confirm You\'re Human to Send' : 
                  'Send Message'}
               </button>
             </form>
