@@ -1,54 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ReCAPTCHA from 'react-google-recaptcha';
 import './Pages.css';
 
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
-  const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
   const [recaptchaCompleted, setRecaptchaCompleted] = useState(false);
+  const [recaptchaToken, setRecaptchaToken] = useState(null);
+  const recaptchaRef = useRef();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    // Check if we're in development or production
-    const isDevelopment = process.env.NODE_ENV === 'development' || window.location.hostname === 'localhost';
-    
-    console.log('Environment check:', {
-      NODE_ENV: process.env.NODE_ENV,
-      hostname: window.location.hostname,
-      isDevelopment
-    });
-    
-    if (!isDevelopment) {
-      // In production, set up reCAPTCHA callbacks
-      window.netlifyRecaptchaCallback = () => {
-        console.log('reCAPTCHA completed');
-        setRecaptchaCompleted(true);
-      };
-      
-      window.netlifyRecaptchaExpiredCallback = () => {
-        console.log('reCAPTCHA expired');
-        setRecaptchaCompleted(false);
-      };
-      
-      setRecaptchaLoaded(true);
-      setRecaptchaCompleted(false); // Start as false, user must complete it
-    } else {
-      // In development, always allow submission
-      setRecaptchaCompleted(true);
-      setRecaptchaLoaded(true);
-    }
-    
-    return () => {
-      // Cleanup
-      if (window.netlifyRecaptchaCallback) {
-        delete window.netlifyRecaptchaCallback;
-      }
-      if (window.netlifyRecaptchaExpiredCallback) {
-        delete window.netlifyRecaptchaExpiredCallback;
-      }
-    };
-  }, []);
+  const handleRecaptchaChange = (token) => {
+    setRecaptchaToken(token);
+    setRecaptchaCompleted(!!token);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -65,9 +31,14 @@ const Contact = () => {
       setIsSubmitting(false);
       return;
     }
-    
+
     // Add the form-name field required by Netlify
     formData.append('form-name', 'contact');
+    
+    // Add reCAPTCHA token
+    if (recaptchaToken) {
+      formData.append('g-recaptcha-response', recaptchaToken);
+    }
 
     // Check if we're in development mode
     const isDevelopment = process.env.NODE_ENV === 'development' || window.location.hostname === 'localhost';
@@ -81,17 +52,12 @@ const Contact = () => {
 
     try {
       if (isDevelopment) {
-        // In development, simulate successful submission
-        console.log('Development mode: Simulating form submission');
-        console.log('Form data:', Object.fromEntries(formData));
-        
-        // Simulate network delay
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        // Redirect to success page
+        // Simulate form submission in development
+        console.log('Form submission simulated in development:', Object.fromEntries(formData));
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate delay
         navigate('/success');
       } else {
-        // In production, submit to Netlify
+        // Production submission
         const response = await fetch('/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -113,6 +79,9 @@ const Contact = () => {
     }
   };
 
+  const isDevelopment = process.env.NODE_ENV === 'development' || window.location.hostname === 'localhost';
+  const recaptchaSiteKey = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
+
   return (
     <div className="page-container">
       <div className="page-content">
@@ -121,19 +90,23 @@ const Contact = () => {
         </div>
         <div className="content-section">
           <div className="contact-form">
-            {(process.env.NODE_ENV === 'development' || window.location.hostname === 'localhost') && (
+            {/* Development notice */}
+            {isDevelopment && (
               <div className="dev-notice" style={{ 
                 padding: '1rem', 
                 marginBottom: '1rem', 
-                backgroundColor: '#d1ecf1', 
-                color: '#0c5460', 
-                border: '1px solid #bee5eb',
-                borderRadius: '4px'
+                backgroundColor: '#e7f3ff', 
+                color: '#0066cc', 
+                border: '1px solid #b3d4fc',
+                borderRadius: '4px',
+                fontSize: '0.9rem'
               }}>
-                <strong>Development Mode:</strong> Form submissions are simulated locally. Deploy to Netlify to test real form submissions.
+                <strong>Development Mode:</strong> Form submission will be simulated. 
+                reCAPTCHA {recaptchaSiteKey ? 'is configured' : 'site key not found'}. 
+                On production, this will submit to Netlify.
               </div>
             )}
-            
+
             {submitStatus === 'error' && (
               <div className="error-message" style={{ 
                 padding: '1rem', 
@@ -146,7 +119,7 @@ const Contact = () => {
                 Sorry, there was an error sending your message. Please try again.
               </div>
             )}
-            
+
             {submitStatus === 'recaptcha-required' && (
               <div className="error-message" style={{ 
                 padding: '1rem', 
@@ -159,90 +132,111 @@ const Contact = () => {
                 Please complete the reCAPTCHA verification before submitting.
               </div>
             )}
-            
+
             <form name="contact" onSubmit={handleSubmit}>
               <input type="hidden" name="form-name" value="contact" />
               
-              {/* Honeypot field - hidden from users but visible to bots */}
+              {/* Honeypot field - hidden from users */}
               <div style={{ display: 'none' }}>
-                <label htmlFor="bot-field">Don't fill this out if you're human:</label>
-                <input type="text" id="bot-field" name="bot-field" />
+                <label>Don't fill this out if you're human: <input name="bot-field" /></label>
               </div>
-              
+
               <div className="form-group">
                 <label htmlFor="name">Name:</label>
                 <input type="text" id="name" name="name" placeholder="Your Name" required />
               </div>
+              
               <div className="form-group">
                 <label htmlFor="email">Email:</label>
                 <input type="email" id="email" name="email" placeholder="your.email@example.com" required />
               </div>
+              
               <div className="form-group">
                 <label htmlFor="phone">Phone (Optional):</label>
                 <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" />
               </div>
+              
               <div className="form-group">
                 <label htmlFor="message">Message:</label>
                 <textarea id="message" name="message" placeholder="Your message here..." rows="5" required></textarea>
               </div>
-              
-              {/* reCAPTCHA (only shown in production) */}
-              {(process.env.NODE_ENV !== 'development' && window.location.hostname !== 'localhost') && (
+
+              {/* reCAPTCHA - only show if site key is available */}
+              {recaptchaSiteKey && !isDevelopment && (
                 <div className="form-group">
                   <label>Please verify you're human:</label>
-                  <div data-netlify-recaptcha="true" style={{ marginTop: '0.5rem' }}></div>
+                  <ReCAPTCHA
+                    ref={recaptchaRef}
+                    sitekey={recaptchaSiteKey}
+                    onChange={handleRecaptchaChange}
+                    style={{ marginTop: '0.5rem' }}
+                  />
                 </div>
               )}
-              
-              {/* Debug info and local reCAPTCHA test */}
-              {(process.env.NODE_ENV === 'development' || window.location.hostname === 'localhost') && (
-                <div style={{ 
-                  padding: '1rem', 
-                  backgroundColor: '#e7f3ff', 
-                  border: '1px solid #b3d4fc',
-                  borderRadius: '4px',
-                  fontSize: '0.9rem',
-                  marginBottom: '1rem'
-                }}>
-                  <div><strong>Debug Info:</strong></div>
-                  <div>ENV: {process.env.NODE_ENV}</div>
-                  <div>Host: {window.location.hostname}</div>
-                  <div>reCAPTCHA Status: {recaptchaCompleted ? 'Completed' : 'Not completed'}</div>
-                  <div style={{ marginTop: '0.5rem' }}>
-                    <strong>Local Testing:</strong> reCAPTCHA will appear in production. 
+
+              {/* Development reCAPTCHA simulator */}
+              {isDevelopment && (
+                <div className="form-group">
+                  <label>reCAPTCHA (Development Mode):</label>
+                  <div style={{ 
+                    padding: '1rem', 
+                    backgroundColor: '#f8f9fa', 
+                    border: '1px solid #dee2e6',
+                    borderRadius: '4px',
+                    marginTop: '0.5rem'
+                  }}>
                     <button 
-                      type="button" 
+                      type="button"
                       onClick={() => setRecaptchaCompleted(!recaptchaCompleted)}
-                      style={{ 
-                        marginLeft: '0.5rem', 
-                        padding: '0.25rem 0.5rem',
-                        fontSize: '0.8rem',
-                        border: '1px solid #007bff',
-                        backgroundColor: '#007bff',
+                      style={{
+                        padding: '0.5rem 1rem',
+                        backgroundColor: recaptchaCompleted ? '#28a745' : '#6c757d',
                         color: 'white',
-                        borderRadius: '3px',
+                        border: 'none',
+                        borderRadius: '4px',
                         cursor: 'pointer'
                       }}
                     >
-                      {recaptchaCompleted ? 'Simulate reCAPTCHA Reset' : 'Simulate reCAPTCHA Complete'}
+                      {recaptchaCompleted ? '✓ reCAPTCHA Completed' : 'Simulate reCAPTCHA Complete'}
                     </button>
                   </div>
+                </div>
+              )}
+
+              {/* Show missing site key warning */}
+              {!recaptchaSiteKey && !isDevelopment && (
+                <div style={{ 
+                  padding: '1rem', 
+                  marginBottom: '1rem', 
+                  backgroundColor: '#fff3cd', 
+                  color: '#856404', 
+                  border: '1px solid #ffeaa7',
+                  borderRadius: '4px'
+                }}>
+                  <strong>Warning:</strong> reCAPTCHA site key not found. Please set REACT_APP_RECAPTCHA_SITE_KEY environment variable.
                 </div>
               )}
               
               <button 
                 type="submit" 
                 className="submit-btn" 
-                disabled={isSubmitting || !recaptchaCompleted}
+                disabled={isSubmitting || (!isDevelopment && !recaptchaCompleted)}
                 style={{
-                  opacity: (!recaptchaCompleted || isSubmitting) ? 0.6 : 1,
-                  cursor: (!recaptchaCompleted || isSubmitting) ? 'not-allowed' : 'pointer'
+                  opacity: (isSubmitting || (!isDevelopment && !recaptchaCompleted)) ? 0.6 : 1,
+                  cursor: (isSubmitting || (!isDevelopment && !recaptchaCompleted)) ? 'not-allowed' : 'pointer',
+                  padding: '12px 24px',
+                  backgroundColor: '#007bff',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '4px',
+                  fontSize: '16px',
+                  fontWeight: '500',
+                  transition: 'all 0.2s ease'
                 }}
               >
                 {isSubmitting ? 'Sending...' : 
-                 !recaptchaCompleted && process.env.NODE_ENV !== 'development' && window.location.hostname !== 'localhost' 
-                   ? 'Complete reCAPTCHA to Send' 
-                   : 'Send Message'}
+                 (!isDevelopment && !recaptchaCompleted) ? 'Complete reCAPTCHA to Send' : 
+                 'Send Message'}
               </button>
             </form>
           </div>
