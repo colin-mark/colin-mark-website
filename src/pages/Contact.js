@@ -13,17 +13,26 @@ const Contact = () => {
     // Check if we're in development or production
     const isDevelopment = process.env.NODE_ENV === 'development' || window.location.hostname === 'localhost';
     
+    console.log('Environment check:', {
+      NODE_ENV: process.env.NODE_ENV,
+      hostname: window.location.hostname,
+      isDevelopment
+    });
+    
     if (!isDevelopment) {
       // In production, set up reCAPTCHA callbacks
       window.netlifyRecaptchaCallback = () => {
+        console.log('reCAPTCHA completed');
         setRecaptchaCompleted(true);
       };
       
       window.netlifyRecaptchaExpiredCallback = () => {
+        console.log('reCAPTCHA expired');
         setRecaptchaCompleted(false);
       };
       
       setRecaptchaLoaded(true);
+      setRecaptchaCompleted(false); // Start as false, user must complete it
     } else {
       // In development, always allow submission
       setRecaptchaCompleted(true);
@@ -180,7 +189,44 @@ const Contact = () => {
               {/* reCAPTCHA (only shown in production) */}
               {(process.env.NODE_ENV !== 'development' && window.location.hostname !== 'localhost') && (
                 <div className="form-group">
-                  <div data-netlify-recaptcha="true"></div>
+                  <label>Please verify you're human:</label>
+                  <div data-netlify-recaptcha="true" style={{ marginTop: '0.5rem' }}></div>
+                </div>
+              )}
+              
+              {/* Debug info and local reCAPTCHA test */}
+              {(process.env.NODE_ENV === 'development' || window.location.hostname === 'localhost') && (
+                <div style={{ 
+                  padding: '1rem', 
+                  backgroundColor: '#e7f3ff', 
+                  border: '1px solid #b3d4fc',
+                  borderRadius: '4px',
+                  fontSize: '0.9rem',
+                  marginBottom: '1rem'
+                }}>
+                  <div><strong>Debug Info:</strong></div>
+                  <div>ENV: {process.env.NODE_ENV}</div>
+                  <div>Host: {window.location.hostname}</div>
+                  <div>reCAPTCHA Status: {recaptchaCompleted ? 'Completed' : 'Not completed'}</div>
+                  <div style={{ marginTop: '0.5rem' }}>
+                    <strong>Local Testing:</strong> reCAPTCHA will appear in production. 
+                    <button 
+                      type="button" 
+                      onClick={() => setRecaptchaCompleted(!recaptchaCompleted)}
+                      style={{ 
+                        marginLeft: '0.5rem', 
+                        padding: '0.25rem 0.5rem',
+                        fontSize: '0.8rem',
+                        border: '1px solid #007bff',
+                        backgroundColor: '#007bff',
+                        color: 'white',
+                        borderRadius: '3px',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      {recaptchaCompleted ? 'Simulate reCAPTCHA Reset' : 'Simulate reCAPTCHA Complete'}
+                    </button>
+                  </div>
                 </div>
               )}
               
