@@ -25,7 +25,7 @@ const Home = () => {
                 <h2>Product & Operations Consultant</h2>
               </div>
               <div className="hero-split-item">
-                <h2>&lt; Coder &amp; AI Innovator &gt;</h2>
+                <h2>&lt; Coder &gt; &amp; AI Innovator</h2>
               </div>
             </div>
 
