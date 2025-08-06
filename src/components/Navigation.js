@@ -19,6 +19,12 @@ const Navigation = () => {
         {/* Navigation tabs */}
         <div className="nav-tabs">
           <Link 
+            to="/" 
+            className={`nav-tab ${location.pathname === '/' ? 'active' : ''}`}
+          >
+            Home
+          </Link>
+          <Link 
             to="/about" 
             className={`nav-tab ${location.pathname === '/about' ? 'active' : ''}`}
           >
