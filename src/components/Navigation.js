@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaLinkedin, FaInstagram } from 'react-icons/fa';
+import { FaLinkedin, FaInstagram, FaGithub } from 'react-icons/fa';
 import './Navigation.css';
 
 const Navigation = () => {
@@ -12,7 +12,7 @@ const Navigation = () => {
         {/* Logo section */}
         <div className="nav-logo">
           <Link to="/" className="logo-link">
-            <div className="logo-placeholder">CM</div>
+            <div className="logo-placeholder">CMA</div>
           </Link>
         </div>
 
@@ -63,6 +63,15 @@ const Navigation = () => {
             rel="noopener noreferrer"
           >
             <FaInstagram size={24} />
+          </a>
+          <a 
+            href="https://github.com/colin-mark" 
+            className="social-icon" 
+            aria-label="GitHub"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaGithub size={24} />
           </a>
         </div>
       </div>

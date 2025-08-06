@@ -32,12 +32,24 @@
   margin-bottom: 1rem;
 }
 
+/* Remove padding for home page to allow full-width hero */
+.page-container.home-page {
+  padding: 0;
+}
+
+/* Hero background - full width */
+.hero-background {
+  width: 100%;
+  background-color: #f8f9fa;
+  padding: 60px 20px;
+  margin: 0;
+}
+
 /* Hero section for home page */
 .hero-section {
   text-align: center;
   max-width: 800px;
   margin: 0 auto;
-  padding: 60px 0;
 }
 
 .hero-section h1 {
@@ -62,6 +74,149 @@
   font-size: 1.1rem;
   color: #777;
   line-height: 1.6;
+}
+
+/* New Hero Split Layout */
+.hero-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin: 40px 0;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-split-item {
+  text-align: center;
+  padding: 30px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-split-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.hero-split-item h2 {
+  font-size: 1.5rem;
+  color: #333;
+  font-weight: 400;
+  margin: 0;
+  line-height: 1.3;
+}
+
+/* Hero Tagline */
+.hero-tagline {
+  margin: 40px auto;
+  max-width: 600px;
+}
+
+.hero-tagline p {
+  font-size: 1.2rem;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* CTA Buttons */
+.hero-ctas {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin: 40px 0;
+}
+
+.cta-button {
+  padding: 14px 30px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  text-decoration: none;
+}
+
+.cta-button.primary {
+  background: #007bff;
+  color: white;
+}
+
+.cta-button.primary:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
+}
+
+.cta-button.secondary {
+  background: transparent;
+  color: #007bff;
+  border: 2px solid #007bff;
+}
+
+.cta-button.secondary:hover {
+  background: #007bff;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
+}
+
+/* Portfolio Preview Section */
+.portfolio-preview-section {
+  margin: 80px 0;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  color: #333;
+  font-weight: 300;
+  margin-bottom: 50px;
+}
+
+.portfolio-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-bottom: 40px;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.portfolio-preview-item {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 40px 30px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.portfolio-preview-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.portfolio-preview-item h3 {
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.portfolio-preview-item p {
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.portfolio-preview-cta {
+  margin-top: 40px;
 }
 
 /* About page styles */
@@ -212,6 +367,41 @@
   
   .hero-section > p {
     font-size: 1.1rem;
+  }
+  
+  /* New responsive styles for hero split */
+  .hero-split {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin: 30px 0;
+  }
+  
+  .hero-split-item h2 {
+    font-size: 1.3rem;
+  }
+  
+  .hero-tagline p {
+    font-size: 1.1rem;
+  }
+  
+  .hero-ctas {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .cta-button {
+    width: 100%;
+    max-width: 280px;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .portfolio-preview-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
   
   .portfolio-grid {
