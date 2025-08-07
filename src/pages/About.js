@@ -22,7 +22,7 @@ const About = () => {
               <div className="about-hero-avatar">
                 <div className="avatar-image">
                   <img 
-                    src="/images/portraits/IMG_2105_circle_web.png" 
+                    src="/images/portraits/avatar_circular.png" 
                     alt="Colin Alcorn" 
                     className="headshot"
                     onError={(e) => {
