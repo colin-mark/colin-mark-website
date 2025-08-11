@@ -171,28 +171,28 @@ const About = () => {
                           <div className="personal-photos">
               <div className="photo-grid">
                 <div className="photo-item" onClick={() => window.open('/images/Photos/250626000753970035.jpg', '_blank')}>
-                  <img src="/images/Photos/250626000753970035.jpg" alt="Personal photo 1" className="personal-photo" />
+                  <img src="/images/Photos/250626000753970035.jpg" alt="Colin outdoors" className="personal-photo" />
                 </div>
                 <div className="photo-item" onClick={() => window.open('/images/Photos/250626000753960007.jpg', '_blank')}>
-                  <img src="/images/Photos/250626000753960007.jpg" alt="Personal photo 2" className="personal-photo" />
+                  <img src="/images/Photos/250626000753960007.jpg" alt="Colin at an event" className="personal-photo" />
                 </div>
                 <div className="photo-item" onClick={() => window.open('/images/Photos/250626000753970037.JPG', '_blank')}>
-                  <img src="/images/Photos/250626000753970037.JPG" alt="Personal photo 3" className="personal-photo" />
+                  <img src="/images/Photos/250626000753970037.JPG" alt="Colin with friends" className="personal-photo" />
                 </div>
                 <div className="photo-item" onClick={() => window.open('/images/Photos/250626000753970071.JPG', '_blank')}>
-                  <img src="/images/Photos/250626000753970071.JPG" alt="Personal photo 4" className="personal-photo" />
+                  <img src="/images/Photos/250626000753970071.JPG" alt="Colin enjoying activities" className="personal-photo" />
                 </div>
                 <div className="photo-item" onClick={() => window.open('/images/Photos/250626000753960002.jpg', '_blank')}>
-                  <img src="/images/Photos/250626000753960002.jpg" alt="Personal photo 5" className="personal-photo" />
+                  <img src="/images/Photos/250626000753960002.jpg" alt="Colin in casual setting" className="personal-photo" />
                 </div>
                 <div className="photo-item" onClick={() => window.open('/images/Photos/250626000753960011.jpg', '_blank')}>
-                  <img src="/images/Photos/250626000753960011.jpg" alt="Personal photo 6" className="personal-photo" />
+                  <img src="/images/Photos/250626000753960011.jpg" alt="Colin at social gathering" className="personal-photo" />
                 </div>
                 <div className="photo-item" onClick={() => window.open('/images/Photos/250626000753960017.jpg', '_blank')}>
-                  <img src="/images/Photos/250626000753960017.jpg" alt="Personal photo 7" className="personal-photo" />
+                  <img src="/images/Photos/250626000753960017.jpg" alt="Colin in lifestyle setting" className="personal-photo" />
                 </div>
                 <div className="photo-item" onClick={() => window.open('/images/Photos/250626000753970006.JPG', '_blank')}>
-                  <img src="/images/Photos/250626000753970006.JPG" alt="Personal photo 8" className="personal-photo" />
+                  <img src="/images/Photos/250626000753970006.JPG" alt="Colin in professional context" className="personal-photo" />
                 </div>
               </div>
             </div>
