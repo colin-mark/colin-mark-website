@@ -17,21 +17,32 @@ const Home = () => {
       <div className="hero-background">
         <div className="page-content">
           <div className="hero-section">
-            <h1>Howdy, I'm Colin.</h1>
+            <h1>Hi, I'm Colin.</h1>
             
-            {/* Split Layout */}
+            {/* Three Column Layout with Centered Headshot */}
             <div className="hero-split">
               <div className="hero-split-item">
-                <h2>AI Powered Product Leader & Consultant</h2>
+                <h2>AI Powered<br />Product Leader</h2>
+              </div>
+              <div className="hero-headshot">
+                <img 
+                  src="/images/portraits/Headshot_copy.png" 
+                  alt="Colin Alcorn" 
+                  className="hero-headshot-image"
+                  onError={(e) => {
+                    console.error('Failed to load headshot image');
+                    e.target.style.display = 'none';
+                  }}
+                />
               </div>
               <div className="hero-split-item">
-                <h2>&lt; Coder &gt; &amp; Operations Consultant</h2>
+                <h2>&lt; Coder &gt; &amp;<br />Startup Operations Consultant</h2>
               </div>
             </div>
 
             {/* Tagline */}
             <div className="hero-tagline">
-              <p>Helping teams take products from 0 to infinity, scaling smarter through product strategy, automation, AI, and fully functional AI prototypes.</p>
+              <p>Turning ideas into scalable products with smart strategy, streamlined operations, AI innovation, and functional AI prototypes.</p>
             </div>
 
             {/* CTA Buttons */}
