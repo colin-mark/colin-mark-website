@@ -1,7 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Pages.css';
 
 const Home = () => {
+  const navigate = useNavigate();
+
   const scrollToPortfolio = () => {
     document.getElementById('portfolio-preview')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -9,6 +12,29 @@ const Home = () => {
   const scrollToContact = () => {
     // For now, scroll to contact section or navigate to contact page
     window.location.href = '/contact';
+  };
+
+  // Featured projects data
+  const featuredProjects = [
+    {
+      id: 'ai-product-strategy',
+      title: 'AI Product Strategy Platform',
+      description: 'AI-driven platform that increased decision-making speed by 40% across multiple organizations.'
+    },
+    {
+      id: 'mobile-event-app',
+      title: 'Event Management App',
+      description: 'Mobile app launched across 50+ events with 95% user satisfaction and 300% engagement increase.'
+    },
+    {
+      id: 'startup-automation',
+      title: 'Operations Automation Suite',
+      description: 'Automation platform that reduced operational overhead by 60% for scaling startups.'
+    }
+  ];
+
+  const handleProjectClick = (projectId) => {
+    navigate(`/project/${projectId}`);
   };
 
   return (
@@ -63,18 +89,20 @@ const Home = () => {
         <div id="portfolio-preview" className="portfolio-preview-section">
           <h2 className="section-title">Featured Work</h2>
           <div className="portfolio-preview-grid">
-            <div className="portfolio-preview-item">
-              <h3>Project Name</h3>
-              <p>Brief project summary</p>
-            </div>
-            <div className="portfolio-preview-item">
-              <h3>Project Name</h3>
-              <p>Brief project summary</p>
-            </div>
-            <div className="portfolio-preview-item">
-              <h3>Project Name</h3>
-              <p>Brief project summary</p>
-            </div>
+            {featuredProjects.map((project) => (
+              <div 
+                key={project.id}
+                className="portfolio-preview-item clickable"
+                onClick={() => handleProjectClick(project.id)}
+                style={{ cursor: 'pointer' }}
+              >
+                <h3>{project.title}</h3>
+                <p>{project.description}</p>
+                <div className="portfolio-preview-cta">
+                  <span className="view-project-text">View Details →</span>
+                </div>
+              </div>
+            ))}
           </div>
           <div className="portfolio-preview-cta">
             <button className="cta-button secondary" onClick={() => window.location.href = '/portfolio'}>
