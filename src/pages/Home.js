@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Pages.css';
 
 const Home = () => {
   const navigate = useNavigate();
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const scrollToPortfolio = () => {
     document.getElementById('portfolio-preview')?.scrollIntoView({ behavior: 'smooth' });
@@ -17,19 +22,22 @@ const Home = () => {
   // Featured projects data
   const featuredProjects = [
     {
-      id: 'ai-product-strategy',
-      title: 'AI Product Strategy Platform',
-      description: 'AI-driven platform that increased decision-making speed by 40% across multiple organizations.'
+      id: 'self-serve-platform',
+      title: 'Self-Serve Mobile App Builder Platform For Events',
+      description: 'Led the full rebuild of our mobile app platform into a scalable, self-serve app builder for clients.',
+      headerImage: '/images/projects/mobile_app_builder.jpeg'
     },
     {
-      id: 'mobile-event-app',
-      title: 'Event Management App',
-      description: 'Mobile app launched across 50+ events with 95% user satisfaction and 300% engagement increase.'
+      id: 'white-label-ticketing',
+      title: 'White Label Ticketing Platform (Aloompa Reservations)',
+      description: 'Fully white-labeled ticketing platform enabling clients to sell tickets under their own brand.',
+      headerImage: '/images/projects/Reservations-Examples-Image-CMS-1024x654.png'
     },
     {
-      id: 'startup-automation',
-      title: 'Operations Automation Suite',
-      description: 'Automation platform that reduced operational overhead by 60% for scaling startups.'
+      id: 'colin-mark-website',
+      title: 'Personal Portfolio Website',
+      description: 'Modern React-based portfolio showcasing AI-powered product leadership and development expertise.',
+      headerImage: '/images/projects/Personal website screenshot.png'
     }
   ];
 
@@ -92,14 +100,27 @@ const Home = () => {
             {featuredProjects.map((project) => (
               <div 
                 key={project.id}
-                className="portfolio-preview-item clickable"
+                className="portfolio-card clickable"
                 onClick={() => handleProjectClick(project.id)}
                 style={{ cursor: 'pointer' }}
               >
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
-                <div className="portfolio-preview-cta">
-                  <span className="view-project-text">View Details →</span>
+                <div className="portfolio-card-image">
+                  <img 
+                    src={project.headerImage} 
+                    alt={project.title}
+                    onError={(e) => {
+                      // Fallback to a placeholder color block
+                      e.target.style.display = 'none';
+                      e.target.parentNode.style.backgroundColor = '#f3f4f6';
+                    }}
+                  />
+                </div>
+                <div className="portfolio-card-body">
+                  <h3 className="portfolio-card-title">{project.title}</h3>
+                  <p className="portfolio-card-description">{project.description}</p>
+                  <div className="portfolio-card-cta">
+                    <span>View Details →</span>
+                  </div>
                 </div>
               </div>
             ))}

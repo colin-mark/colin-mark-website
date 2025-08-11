@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 import './Pages.css';
@@ -10,6 +10,11 @@ const Contact = () => {
   const [recaptchaToken, setRecaptchaToken] = useState(null);
   const recaptchaRef = useRef();
   const navigate = useNavigate();
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleRecaptchaChange = (token) => {
     setRecaptchaToken(token);
