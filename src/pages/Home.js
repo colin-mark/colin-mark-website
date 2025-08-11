@@ -22,10 +22,10 @@ const Home = () => {
             {/* Split Layout */}
             <div className="hero-split">
               <div className="hero-split-item">
-                <h2>Product & Operations Consultant</h2>
+                <h2>AI Powered Product Leader & Consultant</h2>
               </div>
               <div className="hero-split-item">
-                <h2>&lt; Coder &gt; &amp; AI Innovator</h2>
+                <h2>&lt; Coder &gt; &amp; Operations Consultant</h2>
               </div>
             </div>
 
