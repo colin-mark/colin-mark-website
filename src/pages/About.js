@@ -3,6 +3,7 @@ import './Pages.css';
 
 const About = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [showContent, setShowContent] = useState(false);
 
   // Scroll to top and trigger animations when component mounts
   useEffect(() => {
@@ -11,7 +12,16 @@ const About = () => {
     const timer = setTimeout(() => {
       setIsLoaded(true);
     }, 100);
-    return () => clearTimeout(timer);
+    
+    // Show content after hero animation completes (1s total)
+    const contentTimer = setTimeout(() => {
+      setShowContent(true);
+    }, 1100);
+    
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(contentTimer);
+    };
   }, []);
 
   const scrollToPortfolio = () => {
@@ -46,7 +56,7 @@ const About = () => {
       </div>
 
       {/* Career Highlights / Stats Section - White Background */}
-      <div className="about-section-white">
+      <div className={`about-section-white ${showContent ? 'content-fade-in' : 'content-hidden'}`}>
         <div className="page-content">
           <div className="about-stats-section">
             <h2 className="section-title">Experience at a glance.</h2>
@@ -73,7 +83,7 @@ const About = () => {
       </div>
 
       {/* What I Do Section - Gray Background */}
-      <div className="about-section-gray">
+      <div className={`about-section-gray ${showContent ? 'content-fade-in-delayed' : 'content-hidden'}`}>
         <div className="page-content">
           <div className="about-skills-section">
             <h2 className="section-title">What I Do</h2>
@@ -100,7 +110,7 @@ const About = () => {
       </div>
 
       {/* Skills Breakdown Section - White Background */}
-      <div className="about-section-white">
+      <div className={`about-section-white ${showContent ? 'content-fade-in-delayed-2' : 'content-hidden'}`}>
         <div className="page-content">
           <div className="about-skills-breakdown-section">
             <h2 className="section-title">My Skills at a Glance</h2>
@@ -145,7 +155,7 @@ const About = () => {
       </div>
 
       {/* Personal Snapshot Section - Gray Background */}
-      <div className="about-section-gray">
+      <div className={`about-section-gray ${showContent ? 'content-fade-in-delayed-3' : 'content-hidden'}`}>
         <div className="page-content">
           <div className="about-personal-section">
             <h2 className="section-title">Outside of Work</h2>
@@ -194,7 +204,7 @@ const About = () => {
       </div>
 
       {/* CTA Section - White Background */}
-      <div className="about-section-white">
+      <div className={`about-section-white ${showContent ? 'content-fade-in-delayed-4' : 'content-hidden'}`}>
         <div className="page-content">
           <div className="about-cta-section">
             <h2>Want to collaborate or see more of my work?</h2>

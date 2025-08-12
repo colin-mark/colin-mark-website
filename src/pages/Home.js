@@ -1,14 +1,30 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Pages.css';
 
 const Home = () => {
   const navigate = useNavigate();
   const featuredWorkCarouselRef = useRef(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [showContent, setShowContent] = useState(false);
 
-  // Scroll to top when component mounts
+  // Scroll to top and trigger animations when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
+    // Small delay to ensure smooth animation start
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 100);
+    
+    // Show content after hero animation completes (1.5s total)
+    const contentTimer = setTimeout(() => {
+      setShowContent(true);
+    }, 1600);
+    
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(contentTimer);
+    };
   }, []);
 
   const scrollToPortfolio = () => {
@@ -91,14 +107,14 @@ const Home = () => {
       <div className="hero-background">
         <div className="page-content">
           <div className="hero-section">
-            <h1>Hi, I'm Colin.</h1>
+            <h1 className={`${isLoaded ? 'fade-in-down' : 'fade-start-down'}`}>Hi, I'm Colin.</h1>
             
             {/* Three Column Layout with Centered Headshot */}
             <div className="hero-split">
-              <div className="hero-split-item">
+              <div className={`hero-split-item ${isLoaded ? 'slide-in-left' : 'slide-start-left'}`}>
                 <h2>AI Powered<br />Product Leader</h2>
               </div>
-              <div className="hero-headshot">
+              <div className={`hero-headshot ${isLoaded ? 'slide-in-up' : 'slide-start-up'}`}>
                 <img 
                   src="/images/portraits/Headshot_copy.png" 
                   alt="Colin Alcorn" 
@@ -109,18 +125,18 @@ const Home = () => {
                   }}
                 />
               </div>
-              <div className="hero-split-item">
+              <div className={`hero-split-item ${isLoaded ? 'slide-in-right' : 'slide-start-right'}`}>
                 <h2>&lt; Coder &gt; &amp;<br />Startup Operations Consultant</h2>
               </div>
             </div>
 
             {/* Tagline */}
-            <div className="hero-tagline">
+            <div className={`hero-tagline ${isLoaded ? 'fade-in-up' : 'fade-start-up'}`}>
               <p>Turning ideas into scalable products with smart strategy, streamlined operations, AI innovation, and functional AI prototypes.</p>
             </div>
 
             {/* CTA Buttons */}
-            <div className="hero-ctas">
+            <div className={`hero-ctas ${isLoaded ? 'fade-in-up-staggered' : 'fade-start-up'}`}>
               <button className="cta-button primary" onClick={scrollToPortfolio}>
                 View My Work
               </button>
@@ -134,7 +150,7 @@ const Home = () => {
 
       <div className="page-content">
         {/* Featured Work / Portfolio Preview */}
-        <div id="portfolio-preview" className="portfolio-preview-section">
+        <div id="portfolio-preview" className={`portfolio-preview-section ${showContent ? 'content-fade-in' : 'content-hidden'}`}>
           <h2 className="section-title">Featured Work</h2>
           
           {/* Desktop Grid Layout */}
