@@ -98,55 +98,40 @@ const About = () => {
           <div className="about-skills-breakdown-section">
             <h2 className="section-title">My Skills at a Glance</h2>
             <p className="section-subtitle">Where I spend my time and create the most value.</p>
-            <div className="skills-chart">
-              <div className="skill-bar">
-                <div className="skill-label">
-                  <span className="skill-name">Skill 1</span>
-                  <span className="skill-percentage">XX%</span>
-                </div>
-                <div className="skill-progress">
-                  <div className="skill-fill" style={{width: '85%'}}></div>
+            <div className="value-pyramid">
+              <div className="pyramid-tier tier-1">
+                <div className="tier-content">
+                  <h4>Product Management</h4>
+                  <p>Strategy, roadmapping, feature delivery, stakeholder alignment</p>
                 </div>
               </div>
-              <div className="skill-bar">
-                <div className="skill-label">
-                  <span className="skill-name">Skill 2</span>
-                  <span className="skill-percentage">XX%</span>
-                </div>
-                <div className="skill-progress">
-                  <div className="skill-fill" style={{width: '75%'}}></div>
+              <div className="pyramid-tier tier-2">
+                <div className="tier-content">
+                  <h4>Operations & Scaling</h4>
+                  <p>Systems, processes, and automation that support products at scale</p>
                 </div>
               </div>
-              <div className="skill-bar">
-                <div className="skill-label">
-                  <span className="skill-name">Skill 3</span>
-                  <span className="skill-percentage">XX%</span>
-                </div>
-                <div className="skill-progress">
-                  <div className="skill-fill" style={{width: '65%'}}></div>
+              <div className="pyramid-tier tier-3">
+                <div className="tier-content">
+                  <h4>AI & Automation</h4>
+                  <p>Cursor, Warp.dev, AI workflows and prototypes</p>
                 </div>
               </div>
-              <div className="skill-bar">
-                <div className="skill-label">
-                  <span className="skill-name">Skill 4</span>
-                  <span className="skill-percentage">XX%</span>
-                </div>
-                <div className="skill-progress">
-                  <div className="skill-fill" style={{width: '55%'}}></div>
+              <div className="pyramid-tier tier-4">
+                <div className="tier-content">
+                  <h4>Platform Development</h4>
+                  <p>Multi-platform ecosystems: CMS, mobile apps, SDKs, SSO</p>
                 </div>
               </div>
-              <div className="skill-bar">
-                <div className="skill-label">
-                  <span className="skill-name">Skill 5</span>
-                  <span className="skill-percentage">XX%</span>
-                </div>
-                <div className="skill-progress">
-                  <div className="skill-fill" style={{width: '45%'}}></div>
+              <div className="pyramid-tier tier-5">
+                <div className="tier-content">
+                  <h4>Team Leadership & Mentorship</h4>
+                  <p>Mentoring PMs and guiding cross-functional teams</p>
                 </div>
               </div>
             </div>
-            <div className="skills-text-list">
-              <p><strong>Accessibility note:</strong> Skills breakdown - Skill 1 (XX%), Skill 2 (XX%), Skill 3 (XX%), Skill 4 (XX%), Skill 5 (XX%)</p>
+            <div className="pyramid-note">
+              <p><strong>Value Hierarchy:</strong> From core competency (Product Management) to specialized expertise (Team Leadership), each tier represents where I deliver the most impact.</p>
             </div>
           </div>
         </div>

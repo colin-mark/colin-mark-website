@@ -542,6 +542,82 @@
   line-height: 1.5;
 }
 
+/* Value Pyramid Styles */
+.value-pyramid {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.pyramid-tier {
+  background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
+  border-radius: 12px;
+  color: white;
+  padding: 24px 32px;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.pyramid-tier:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(79, 70, 229, 0.3);
+}
+
+.pyramid-tier::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+  pointer-events: none;
+}
+
+/* Tier sizing - creates pyramid effect */
+.tier-1 { width: 100%; background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%); }
+.tier-2 { width: 85%; background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); }
+.tier-3 { width: 70%; background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
+.tier-4 { width: 55%; background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%); }
+.tier-5 { width: 40%; background: linear-gradient(135deg, #93c5fd 0%, #60a5fa 100%); color: #1e3a8a; }
+
+.tier-content h4 {
+  margin: 0 0 8px 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.tier-content p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  opacity: 0.95;
+}
+
+.pyramid-note {
+  max-width: 700px;
+  margin: 30px auto 0 auto;
+  text-align: center;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #4f46e5;
+}
+
+.pyramid-note p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.5;
+}
+
 /* Personal Snapshot Section */
 .about-personal-section {
   padding: 0;
@@ -1045,6 +1121,38 @@
   }
   
   .skills-text-list {
+    margin: 20px 10px 0 10px;
+    padding: 15px;
+  }
+  
+  /* Mobile pyramid styles */
+  .value-pyramid {
+    max-width: 100%;
+    gap: 8px;
+  }
+  
+  .pyramid-tier {
+    padding: 20px 16px;
+    margin: 0 10px;
+  }
+  
+  .tier-content h4 {
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+  }
+  
+  .tier-content p {
+    font-size: 0.85rem;
+  }
+  
+  /* Maintain pyramid proportions on mobile */
+  .tier-1 { width: calc(100% - 20px); }
+  .tier-2 { width: calc(85% - 20px); }
+  .tier-3 { width: calc(70% - 20px); }
+  .tier-4 { width: calc(55% - 20px); }
+  .tier-5 { width: calc(45% - 20px); }
+  
+  .pyramid-note {
     margin: 20px 10px 0 10px;
     padding: 15px;
   }
