@@ -58,7 +58,8 @@ const ProjectSummary = () => {
       summary: 'A modern mobile app experience designed for the CMA Connect platform, integrating Single Sign-On (SSO) and innovative schedule sharing functionality. The app allows users to log in once and seamlessly access all CMA Connect features without re-authenticating across multiple services. The Schedule Sharing feature enables attendees to share their personal event schedules via short links, allowing friends to view them in a browser or subscribe directly within the app. The project emphasized secure authentication, seamless user experience, and scalable backend architecture, while delivering a visually engaging and user-friendly interface for CMA Fest attendees.',
       technologies: ['Flutter', 'AWS Cognito', 'GraphQL', 'React', 'Firebase', 'Google Cloud'],
       links: [
-        { label: 'Download on App Store', url: 'https://apps.apple.com/us/app/cma-connect/id6448734637', type: 'external' },
+        { label: 'Download on App Store', url: 'https://apps.apple.com/us/app/cma-connect/id878258500', type: 'external' },
+        { label: 'Download on Google Play', url: 'https://play.google.com/store/apps/details?id=com.cma.cmafest&hl=en_US', type: 'external' },
         { label: 'Learn More About CMA Fest', url: 'https://cmafest.com/', type: 'external' }
       ]
     },
@@ -102,7 +103,7 @@ const ProjectSummary = () => {
       technologies: ['Three.js (WebGL)', 'JavaScript (ES6+)', 'Cannon.js (Physics)', 'Howler.js (3D Audio)', 'Vite (Build System)', 'HTML5 Canvas', 'Web Audio API'],
       links: [
         { label: 'View Source Code', url: 'https://github.com/colin-mark/boy-and-his-dog', type: 'external' },
-        { label: 'Play Game Demo', url: '#', type: 'external' }
+        { label: 'Play Game Demo', url: 'https://aboyandhisdog.colin-mark.com/', type: 'external' }
       ]
     },
     'personal-project-1': {
@@ -181,39 +182,6 @@ const ProjectSummary = () => {
             <h1 className="project-title">{project.title}</h1>
           </div>
           
-          {/* Summary Section */}
-          <div className="project-summary-section">
-            <h2 className="section-title">Project Overview</h2>
-            <div className="project-summary-content">
-              {project.summaryWithLinks ? (
-                <div className="project-summary-text">{project.summaryWithLinks}</div>
-              ) : (
-                <p className="project-summary-text">{project.summary}</p>
-              )}
-            </div>
-          </div>
-
-          {/* Impact Section - Only for projects that have impact data */}
-          {project.impact && (
-            <div className="project-impact-section">
-              <h2 className="section-title">Impact</h2>
-              <div className="impact-content">
-                <div className="impact-item">
-                  <h4 className="impact-category">For the Company:</h4>
-                  <p className="impact-text">{project.impact.company}</p>
-                </div>
-                <div className="impact-item">
-                  <h4 className="impact-category">For the Internal Team:</h4>
-                  <p className="impact-text">{project.impact.team}</p>
-                </div>
-                <div className="impact-item">
-                  <h4 className="impact-category">For Clients:</h4>
-                  <p className="impact-text">{project.impact.clients}</p>
-                </div>
-              </div>
-            </div>
-          )}
-
           {/* Technologies Section */}
           {project.technologies && project.technologies.length > 0 && (
             <div className="project-technologies-section">
@@ -248,6 +216,39 @@ const ProjectSummary = () => {
               ))}
             </div>
           </div>
+
+          {/* Summary Section */}
+          <div className="project-summary-section">
+            <h2 className="section-title">Project Overview</h2>
+            <div className="project-summary-content">
+              {project.summaryWithLinks ? (
+                <div className="project-summary-text">{project.summaryWithLinks}</div>
+              ) : (
+                <p className="project-summary-text">{project.summary}</p>
+              )}
+            </div>
+          </div>
+
+          {/* Impact Section - Only for projects that have impact data */}
+          {project.impact && (
+            <div className="project-impact-section">
+              <h2 className="section-title">Impact</h2>
+              <div className="impact-content">
+                <div className="impact-item">
+                  <h4 className="impact-category">For the Company:</h4>
+                  <p className="impact-text">{project.impact.company}</p>
+                </div>
+                <div className="impact-item">
+                  <h4 className="impact-category">For the Internal Team:</h4>
+                  <p className="impact-text">{project.impact.team}</p>
+                </div>
+                <div className="impact-item">
+                  <h4 className="impact-category">For Clients:</h4>
+                  <p className="impact-text">{project.impact.clients}</p>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* CTA Section */}
           <div className="project-cta-section">
