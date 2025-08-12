@@ -94,6 +94,34 @@ const ProjectSummary = () => {
         { label: 'View GitHub Repository', url: 'https://github.com/colin-mark/colin-mark-website', type: 'external' },
         { label: 'View Source Code', url: 'https://github.com/colin-mark/colin-mark-website/tree/main/src', type: 'external' }
       ]
+    },
+    'boy-and-his-dog': {
+      title: 'Boy and His Dog – 3D Hunting Simulation Game',
+      headerImage: '/images/projects/A Boy and His Dog.png',
+      summary: 'A playful 3D hunting game where you and your black lab explore the open plains in search of pheasants — all running right in your browser, no downloads or plugins needed. It\'s part outdoor adventure, part loyal dog simulator, and entirely a "this was fun to make" coding project. You play as a young hunter, teamed up with an AI-powered lab who can heel, search, and retrieve like the goodest of boys. The dog responds to simple voice commands, navigates varied terrain, and can flush birds or bring back downed game. Pheasants have their own behavior patterns, so it\'s never quite the same twice. Under the hood, it uses realistic ballistics, dynamic terrain generation with procedural grass, and a simple entity-component setup to keep things running smoothly at 60fps. The build uses optimizations like frustum culling and object pooling, but the focus was always more on creating a fun little experience than engineering something massive. It was a great excuse to try out AI-driven game behaviors, physics integration, and real-time animation blending in a relaxed, creative way — and to make a game where the dog is just as much the star as the player.',
+      technologies: ['Three.js (WebGL)', 'JavaScript (ES6+)', 'Cannon.js (Physics)', 'Howler.js (3D Audio)', 'Vite (Build System)', 'HTML5 Canvas', 'Web Audio API'],
+      links: [
+        { label: 'View Source Code', url: 'https://github.com/colin-mark/boy-and-his-dog', type: 'external' },
+        { label: 'Play Game Demo', url: '#', type: 'external' }
+      ]
+    },
+    'personal-project-1': {
+      title: 'Coming Soon',
+      headerImage: '/images/projects/personal-project-1.jpg',
+      summaryWithLinks: (
+        <>
+          I'm always working on new projects and prototypes that push the boundaries of what's possible with modern web technologies and AI integration. From experimental games to innovative productivity tools, there's always something exciting in development.
+          <br /><br />
+          Follow along on my <a href="https://github.com/colin-mark" target="_blank" rel="noopener noreferrer" style={{color: '#4f46e5', textDecoration: 'underline'}}>GitHub</a> to see the latest code, experiments, and work-in-progress projects. You'll get a behind-the-scenes look at my development process and early access to new ideas as they take shape.
+          <br /><br />
+          Interested in collaborating or have an idea you'd like to explore together? I'm always open to discussing new opportunities and creative challenges.
+        </>
+      ),
+      technologies: ['React', 'JavaScript', 'Three.js', 'AI/ML', 'Node.js', 'Various Experimental Technologies'],
+      links: [
+        { label: 'Follow on GitHub', url: 'https://github.com/colin-mark', type: 'external' },
+        { label: 'Let\'s Work Together', url: '/contact', type: 'internal' }
+      ]
     }
   };
 

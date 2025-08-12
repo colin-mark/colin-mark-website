@@ -218,13 +218,23 @@
 }
 
 .portfolio-preview-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24px;
   margin-bottom: 40px;
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
+  max-width: none;
+  flex-wrap: nowrap;
+}
+
+.portfolio-preview-grid .portfolio-card {
+  flex: 0 0 320px !important;
+  width: 320px !important;
+  min-width: 320px !important;
+  max-width: 320px !important;
+  display: block !important;
 }
 
 .portfolio-preview-item {
@@ -270,6 +280,31 @@
 
 .portfolio-preview-section > .portfolio-preview-cta {
   margin-top: 40px;
+}
+
+/* Portfolio Preview Image Styling */
+.portfolio-preview-image {
+  width: 100%;
+  height: 200px;
+  background-color: #f3f4f6;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.portfolio-preview-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Responsive Display Classes */
+.desktop-only {
+  display: block;
+}
+
+.mobile-only {
+  display: none;
 }
 
 /* About page styles */
@@ -883,10 +918,20 @@
     font-size: 2rem;
   }
   
-  .portfolio-preview-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
+  /* Switch to carousel on mobile */
+  .desktop-only {
+    display: none !important;
   }
+  
+  .portfolio-preview-grid {
+    display: none !important;
+  }
+  
+  .mobile-only {
+    display: block;
+  }
+  
+  /* Portfolio preview grid is hidden on mobile, so no need to style it */
   
   .portfolio-grid {
     grid-template-columns: 1fr;
@@ -1429,6 +1474,7 @@
   cursor: pointer;
   padding: 8px 0;
   transition: color 0.2s ease;
+  white-space: nowrap;
 }
 
 .carousel-see-all:hover {
@@ -1594,6 +1640,13 @@
     height: 157px; /* Maintain 16:9 ratio for 280px */
   }
   
+  .carousel-header {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+  
   .carousel-track {
     gap: 16px;
     padding-left: 20px;
@@ -1610,6 +1663,10 @@
 @media (max-width: 480px) {
   .carousel-header {
     margin-bottom: 12px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: -20px;
+    margin-right: -20px;
   }
   
   .carousel-title {

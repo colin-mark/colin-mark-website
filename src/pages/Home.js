@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Pages.css';
 
 const Home = () => {
   const navigate = useNavigate();
+  const featuredWorkCarouselRef = useRef(null);
 
   // Scroll to top when component mounts
   useEffect(() => {
@@ -44,6 +45,45 @@ const Home = () => {
   const handleProjectClick = (projectId) => {
     navigate(`/project/${projectId}`);
   };
+
+  const scrollCarousel = (carouselRef, direction) => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
+
+    const cardWidth = 320; // Card width + gap
+    const scrollAmount = direction === 'left' ? -cardWidth : cardWidth;
+    
+    carousel.scrollBy({
+      left: scrollAmount,
+      behavior: 'smooth'
+    });
+  };
+
+  const ProjectCard = ({ project, onClick }) => (
+    <div 
+      className="portfolio-card"
+      onClick={() => onClick(project.id)}
+    >
+      <div className="portfolio-card-image">
+        <img 
+          src={project.headerImage} 
+          alt={project.title}
+          onError={(e) => {
+            // Fallback to a placeholder color block
+            e.target.style.display = 'none';
+            e.target.parentNode.style.backgroundColor = '#f3f4f6';
+          }}
+        />
+      </div>
+      <div className="portfolio-card-body">
+        <h3 className="portfolio-card-title">{project.title}</h3>
+        <p className="portfolio-card-description">{project.description}</p>
+        <div className="portfolio-card-cta">
+          <span>View Details →</span>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <div className="page-container home-page">
@@ -96,35 +136,47 @@ const Home = () => {
         {/* Featured Work / Portfolio Preview */}
         <div id="portfolio-preview" className="portfolio-preview-section">
           <h2 className="section-title">Featured Work</h2>
-          <div className="portfolio-preview-grid">
+          
+          {/* Desktop Grid Layout */}
+          <div className="portfolio-preview-grid desktop-only">
             {featuredProjects.map((project) => (
-              <div 
-                key={project.id}
-                className="portfolio-card clickable"
-                onClick={() => handleProjectClick(project.id)}
-                style={{ cursor: 'pointer' }}
-              >
-                <div className="portfolio-card-image">
-                  <img 
-                    src={project.headerImage} 
-                    alt={project.title}
-                    onError={(e) => {
-                      // Fallback to a placeholder color block
-                      e.target.style.display = 'none';
-                      e.target.parentNode.style.backgroundColor = '#f3f4f6';
-                    }}
-                  />
-                </div>
-                <div className="portfolio-card-body">
-                  <h3 className="portfolio-card-title">{project.title}</h3>
-                  <p className="portfolio-card-description">{project.description}</p>
-                  <div className="portfolio-card-cta">
-                    <span>View Details →</span>
-                  </div>
-                </div>
-              </div>
+              <ProjectCard 
+                key={project.id} 
+                project={project} 
+                onClick={handleProjectClick}
+              />
             ))}
           </div>
+
+          {/* Mobile Carousel Layout */}
+          <div className="mobile-only">
+            <div className="carousel-container">
+              <button 
+                className="carousel-arrow carousel-arrow-left"
+                onClick={() => scrollCarousel(featuredWorkCarouselRef, 'left')}
+                aria-label="Scroll left"
+              >
+                ←
+              </button>
+              <div className="carousel-track" ref={featuredWorkCarouselRef}>
+                {featuredProjects.map((project) => (
+                  <ProjectCard 
+                    key={project.id} 
+                    project={project} 
+                    onClick={handleProjectClick}
+                  />
+                ))}
+              </div>
+              <button 
+                className="carousel-arrow carousel-arrow-right"
+                onClick={() => scrollCarousel(featuredWorkCarouselRef, 'right')}
+                aria-label="Scroll right"
+              >
+                →
+              </button>
+            </div>
+          </div>
+
           <div className="portfolio-preview-cta">
             <button className="cta-button secondary" onClick={() => window.location.href = '/portfolio'}>
               View All Projects

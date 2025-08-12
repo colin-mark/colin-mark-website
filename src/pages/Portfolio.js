@@ -43,22 +43,22 @@ const Portfolio = () => {
       headerImage: '/images/projects/Personal website screenshot.png'
     },
     {
-      id: 'ai-prototype-2',
-      title: 'Project 5',
-      description: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.',
-      headerImage: '/images/projects/ai-prototype-2.jpg'
+      id: 'boy-and-his-dog',
+      title: 'Boy and His Dog – 3D Hunting Simulation Game',
+      description: 'A playful 3D hunting game where you and your black lab explore the open plains in search of pheasants — all running right in your browser.',
+      headerImage: '/images/projects/A Boy and His Dog.png'
     },
     {
       id: 'personal-project-1',
-      title: 'Project 6',
-      description: 'Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet consectetur.',
+      title: 'Coming Soon',
+      description: 'More exciting projects and prototypes are in development. Follow along on my website or GitHub.',
       headerImage: '/images/projects/personal-project-1.jpg'
     }
   ];
 
   const handleProjectClick = (projectId) => {
     // Only navigate for existing projects
-    if (['self-serve-platform', 'white-label-ticketing', 'cma-connect-app', 'colin-mark-website'].includes(projectId)) {
+    if (['self-serve-platform', 'white-label-ticketing', 'cma-connect-app', 'colin-mark-website', 'boy-and-his-dog', 'personal-project-1'].includes(projectId)) {
       navigate(`/project/${projectId}`);
     }
   };
@@ -106,9 +106,11 @@ const Portfolio = () => {
     <div className="carousel-section">
       <div className="carousel-header">
         <h2 className="carousel-title">{title}</h2>
-        <button className="carousel-see-all" onClick={onSeeAll}>
-          See All
-        </button>
+        {projects.length > 3 && (
+          <button className="carousel-see-all" onClick={onSeeAll}>
+            See All
+          </button>
+        )}
       </div>
       <div className="carousel-container">
         <button 
