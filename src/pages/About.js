@@ -1,10 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Pages.css';
 
 const About = () => {
-  // Scroll to top when component mounts
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  // Scroll to top and trigger animations when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
+    // Small delay to ensure smooth animation start
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 100);
+    return () => clearTimeout(timer);
   }, []);
 
   const scrollToPortfolio = () => {
@@ -22,14 +29,14 @@ const About = () => {
         <div className="page-content">
           <div className="about-hero-section">
             <div className="about-hero-wrapper">
-              <div className="about-hero-media">
+              <div className={`about-hero-media ${isLoaded ? 'slide-in-left' : 'slide-start-left'}`}>
                 <img 
                   src="/images/portraits/Headshot_copy.png" 
                   alt="Portrait of Colin Alcorn" 
                   className="about-hero-image"
                 />
               </div>
-              <div className="about-hero-copy">
+              <div className={`about-hero-copy ${isLoaded ? 'slide-in-right' : 'slide-start-right'}`}>
                 <h1 className="about-hero-title">who i am.</h1>
                 <p className="about-hero-lede">I'm a product leader with 12+ years in SaaS, mobile and web apps, and generative AI. I help teams — from startups to enterprise — take products from concept to launch, create go-to-market strategies, and build systems that scale. As Group Product Manager at WMT Digital, I lead multi-product roadmaps, mentor product teams, prototype with AI, and deliver features that drive personalization, retention, and engagement.</p>
               </div>
